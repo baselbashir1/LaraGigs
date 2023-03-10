@@ -17,17 +17,13 @@ use PhpParser\Node\Expr\List_;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/posts', function () {
     return view('listings', [
         'heading' => 'Latest Listings',
         'listings' => Listing::all()
     ]);
 });
 
-Route::get('/single/{id}', function ($id) {
+Route::get('/listings/{id}', function ($id) {
     return view('listing', [
         'listing' => Listing::find($id)
     ]);
