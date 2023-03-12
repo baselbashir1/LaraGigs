@@ -10,7 +10,7 @@
 
 <body>
     <h1>Laragigs</h1>
-    @yield('conent')
+    @yield('content')
 </body>
 
 </html>
