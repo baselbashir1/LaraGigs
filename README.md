@@ -67,7 +67,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ## Important Commands
 
-To link the name of file in the storage with the file name in the database.
+To link the file name in the storage with the file name in the database run this.
 
 ```
 php artisan storage:link
