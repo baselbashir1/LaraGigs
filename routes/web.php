@@ -21,12 +21,14 @@ use PhpParser\Node\Expr\List_;
 
 Route::controller(ListingController::class)->group(function () {
     Route::get('/', 'index');
-    Route::get('/listings/create', 'create')->middleware('auth');
-    Route::post('/listings', 'store')->middleware('auth');
-    Route::get('/listings/{listing}/edit', 'edit')->middleware('auth');
-    Route::put('/listings/{listing}', 'update')->middleware('auth');
-    Route::delete('/listings/{listing}', 'destroy')->middleware('auth');
-    Route::get('/listings/manage', 'manage')->middleware('auth');
+    Route::middleware('auth')->group(function () {
+        Route::get('/listings/create', 'create');
+        Route::post('/listings', 'store');
+        Route::get('/listings/{listing}/edit', 'edit');
+        Route::put('/listings/{listing}', 'update');
+        Route::delete('/listings/{listing}', 'destroy');
+        Route::get('/listings/manage', 'manage');
+    });
     Route::get('/listings/{listing}', 'show'); // Single Listing
 });
 
