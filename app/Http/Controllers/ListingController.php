@@ -64,7 +64,7 @@ class ListingController extends Controller
             'company' => 'required',
             'location' => 'required',
             'website' => 'required',
-            'email' => 'required|email|unique:listings',
+            'email' => 'required|email',
             'tags' => 'required',
             'description' => 'required'
         ]);
@@ -80,7 +80,7 @@ class ListingController extends Controller
 
     public function destroy(Listing $listing)
     {
-        if ($listing->iser_id != auth()->id())
+        if ($listing->user_id != auth()->id())
             abort(403, 'Unauthorized Action');
 
         $listing->delete();

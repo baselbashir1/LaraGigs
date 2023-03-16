@@ -19,29 +19,21 @@ use PhpParser\Node\Expr\List_;
 |
 */
 
-Route::get('/', [ListingController::class, 'index']);
+Route::controller(ListingController::class)->group(function () {
+    Route::get('/', 'index');
+    Route::get('/listings/create', 'create')->middleware('auth');
+    Route::post('/listings', 'store')->middleware('auth');
+    Route::get('/listings/{listing}/edit', 'edit')->middleware('auth');
+    Route::put('/listings/{listing}', 'update')->middleware('auth');
+    Route::delete('/listings/{listing}', 'destroy')->middleware('auth');
+    Route::get('/listings/manage', 'manage')->middleware('auth');
+    Route::get('/listings/{listing}', 'show'); // Single Listing
+});
 
-Route::get('/listings/create', [ListingController::class, 'create'])->middleware('auth');
-
-Route::post('/listings', [ListingController::class, 'store'])->middleware('auth');
-
-Route::get('/listings/{listing}/edit', [ListingController::class, 'edit'])->middleware('auth');
-
-Route::put('/listings/{listing}', [ListingController::class, 'update'])->middleware('auth');
-
-Route::delete('/listings/{listing}', [ListingController::class, 'destroy'])->middleware('auth');
-
-Route::get('/listings/manage', [ListingController::class, 'manage'])->middleware('auth');
-
-// Single Listing
-Route::get('/listings/{listing}', [ListingController::class, 'show']);
-
-Route::get('/register', [UserController::class, 'create'])->middleware('guest');
-
-Route::post('/users', [UserController::class, 'store']);
-
-Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
-
-Route::get('/login', [UserController::class, 'login'])->name('login')->middleware('guest');
-
-Route::post('/users/authenticate', [UserController::class, 'authenticate']);
+Route::controller(UserController::class)->group(function () {
+    Route::get('/register', 'create')->middleware('guest');
+    Route::post('/users', 'store');
+    Route::post('/logout', 'logout')->middleware('auth');
+    Route::get('/login', 'login')->name('login')->middleware('guest');
+    Route::post('/users/authenticate', 'authenticate');
+});
