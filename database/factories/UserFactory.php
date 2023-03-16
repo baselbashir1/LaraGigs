@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\Listing;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -35,10 +34,5 @@ class UserFactory extends Factory
         return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
         ]);
-    }
-
-    public function listings()
-    {
-        return $this->hasMany(Listing::class, 'user_id');
     }
 }
